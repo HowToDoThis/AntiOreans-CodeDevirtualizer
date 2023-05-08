@@ -8,7 +8,7 @@ bool instruction_container_branch_evaluator::try_evaluate_branch(ud_instruction&
 	bool jump_condition = false;
 
 	if (!this->evaluate_branch(instruction.mnemonic, &jump_condition))
-		jump_condition = (askbuttons_c(NULL, NULL, NULL, ASKBTN_YES, "HIDECANCEL\nCould not evaluate jcc branch for mnemonic %04X at address %08X\nWould you like to follow the jump?", instruction.mnemonic, instruction.get_address<uint32_t>()) == ASKBTN_YES);
+		jump_condition = (ask_buttons(NULL, NULL, NULL, ASKBTN_YES, "HIDECANCEL\nCould not evaluate jcc branch for mnemonic %04X at address %08X\nWould you like to follow the jump?", instruction.mnemonic, instruction.get_address<uint32_t>()) == ASKBTN_YES);
 
 	return jump_condition;
 }

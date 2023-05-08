@@ -7,7 +7,7 @@
 bool oreans_entry::try_devirtualize(uint32_t vm_function, uint32_t vm_entry)
 {
 	unsigned char vm_entrance_buffer[VM_ENTRANCE_BUFFER_SIZE];
-	get_many_bytes(vm_entry, vm_entrance_buffer, sizeof(vm_entrance_buffer));
+	get_bytes(vm_entrance_buffer, sizeof(vm_entrance_buffer), vm_entry);
 
 	instruction_container vm_entrance;
 	this->decode_vm_entrance(vm_entrance_buffer, vm_entry, vm_entrance);
@@ -56,7 +56,7 @@ bool oreans_entry::try_devirtualize(uint32_t vm_function, uint32_t vm_entry)
 
 bool oreans_entry::show_virtual_machine_dialog(uint32_t vm_function, uint32_t vm_entry, instruction_container& vm_instructions, qstrvec_t& virtual_machines, int32_t& vm_type_selection)
 {
-	if (AskUsingForm_c("Select Virtual Machine\nAuto-analysis failed to determine VM-type for address %M.\n<Please specify VM architecture:b:0:::>",
+	if (ask_form("Select Virtual Machine\nAuto-analysis failed to determine VM-type for address %M.\n<Please specify VM architecture:b:0:::>",
 		reinterpret_cast<ea_t*>(&vm_function), &virtual_machines, &vm_type_selection) == ASKBTN_YES)
 	{
 		switch (vm_type_selection)

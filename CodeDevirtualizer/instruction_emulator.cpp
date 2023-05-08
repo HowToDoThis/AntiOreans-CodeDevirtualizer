@@ -2,6 +2,8 @@
 
 #include <idp.hpp>
 
+#include <intrin.h>
+
 namespace instruction
 {
 	template <typename T>

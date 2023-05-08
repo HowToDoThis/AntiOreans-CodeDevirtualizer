@@ -13,7 +13,8 @@ wild_base::wild_base(wild_context& context)
 
 bool wild_base::devirtualize(uint32_t vm_function, uint32_t vm_entry, instruction_container& vm_instructions)
 {
-	if (!decode_insn(vm_function) || (cmd.itype != NN_jmp && cmd.itype != NN_call))
+	insn_t cmd;
+	if (!decode_insn(&cmd, vm_function) || (cmd.itype != NN_jmp && cmd.itype != NN_call))
 	{
 		msg("[CodeDevirtualizer] Instruction at %08X either could not be decoded or is not a jump or call.\n", vm_function);
 		return false;
@@ -21,7 +22,7 @@ bool wild_base::devirtualize(uint32_t vm_function, uint32_t vm_entry, instructio
 	
 	context.set_initial_parameters(vm_instructions.at(0).get_operand_data(0), vm_instructions.at(1).get_operand_data(0));
 	
-	if (!decode_insn(vm_instructions.at(2).get_address<uint32_t>()))
+	if (!decode_insn(&cmd, vm_instructions.at(2).get_address<uint32_t>()))
 	{
 		msg("[CodeDevirtualizer] Instruction at %08X could not be decoded.\n", vm_instructions.at(2).get_address<uint32_t>());
 		return false;
@@ -29,9 +30,9 @@ bool wild_base::devirtualize(uint32_t vm_function, uint32_t vm_entry, instructio
 	
 	this->vm_function = vm_function;
 
-	if (this->vm_entrance != cmd.Operands[0].addr)
+	if (this->vm_entrance != cmd.ops[0].addr)
 	{
-		if (!this->parse_virtual_machine(cmd.Operands[0].addr))
+		if (!this->parse_virtual_machine(cmd.ops[0].addr))
 			return false;
 	}
 	

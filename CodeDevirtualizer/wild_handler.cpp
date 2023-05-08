@@ -1779,7 +1779,7 @@ bool wild_handler::step_handler_crypt(instruction_container& instructions, wild_
 	context.step_params[1] = register_id;
 	context.step_params[2] = value;
 
-	if (!get_many_bytes(context.vm_context + value, &value, sizeof(uint32_t)))
+	if (!get_bytes(&value, sizeof(uint32_t), context.vm_context + value))
 		return false;
 
 	context.step_params[3] = value;

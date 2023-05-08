@@ -9,12 +9,12 @@ bool segment_manager::make_segment_copy(uint32_t address, std::size_t index)
 	{
 		segment_t* segment = getnseg(seg_index);
 
-		if (address >= segment->startEA && address < segment->endEA)
+		if (address >= segment->start_ea && address < segment->end_ea)
 		{
 			if (index < this->vm_segments.size())
 				this->vm_segments.erase(this->vm_segments.begin() + index);
 
-			this->vm_segments.insert(this->vm_segments.begin() + index, segment_copy(segment->startEA, segment->endEA));
+			this->vm_segments.insert(this->vm_segments.begin() + index, segment_copy(segment->start_ea, segment->end_ea));
 			return true;
 		}
 	}

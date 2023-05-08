@@ -5,6 +5,8 @@
 
 #include <idp.hpp>
 
+#include <cmath>
+
 #define operand_prefix 0x66
 
 fish_handler::fish_handler(uint16_t index)

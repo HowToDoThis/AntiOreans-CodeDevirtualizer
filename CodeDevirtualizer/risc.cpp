@@ -7,14 +7,16 @@
 
 bool risc::is_signature(instruction_container& vm_entrance)
 {
-	decode_insn(vm_entrance.at(1).get_address<uint32_t>());
+	insn_t cmd;
 
-	if (cmd.itype == NN_jmp && cmd.Operands[0].addr != 0)
+	decode_insn(&cmd, vm_entrance.at(1).get_address<uint32_t>());
+
+	if (cmd.itype == NN_jmp && cmd.ops[0].addr != 0)
 	{
 		unsigned char risc_vm_signature_buffer[RISC_VM_SIGNATURE_BUFFER_SIZE];
-		get_many_bytes(cmd.Operands[0].addr, risc_vm_signature_buffer, sizeof(risc_vm_signature_buffer));
+		get_bytes(risc_vm_signature_buffer, sizeof(risc_vm_signature_buffer), cmd.ops[0].addr);
 			
-		ud_instruction instruction(cmd.Operands[0].addr);
+		ud_instruction instruction(cmd.ops[0].addr);
 		instruction.set_input(risc_vm_signature_buffer, sizeof(risc_vm_signature_buffer));
 
 		instruction_container instructions;

@@ -1,6 +1,7 @@
 #include "ud_instruction.hpp"
 
 #include <algorithm>
+#include <cmath>
 
 void ud_instruction::initialize(uint64_t base_address, uint8_t mode)
 {

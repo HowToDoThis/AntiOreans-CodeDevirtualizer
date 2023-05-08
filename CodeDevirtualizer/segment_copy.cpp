@@ -8,7 +8,7 @@ segment_copy::segment_copy(uint32_t start_address, uint32_t end_address)
 	this->segment_info = std::make_pair(start_address, end_address);
 
 	this->segment_data.resize(end_address - start_address);
-	get_many_bytes(start_address, &this->segment_data[0], end_address - start_address);
+	get_bytes(&this->segment_data[0], end_address - start_address, start_address);
 }
 
 uint32_t segment_copy::start() const

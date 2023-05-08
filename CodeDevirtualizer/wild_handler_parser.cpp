@@ -14,7 +14,7 @@ void wild_handler_parser::decode_virtual_handler(instruction_container& instruct
 	compares = 0;
 
 	uint32_t vm_delta = 0;
-	get_many_bytes(this->context.vm_context + this->context.vm_handler_table_offset, &vm_delta, sizeof(uint32_t));
+	get_bytes(&vm_delta, sizeof(uint32_t), this->context.vm_context + this->context.vm_handler_table_offset);
 
 	if (vm_delta == this->context.vm_handler_table)
 		vm_delta = 0;
