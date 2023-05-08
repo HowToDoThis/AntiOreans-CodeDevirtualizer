@@ -5,6 +5,8 @@
 
 #include <initializer_list>
 #include <utility>
+#include <cmath>
+#include <intrin.h>
 
 enum ud_size : uint16_t
 {
