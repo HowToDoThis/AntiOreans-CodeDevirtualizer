@@ -86,7 +86,8 @@
       <AdditionalOptions>/EXPORT:PLUGIN %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)$(ProjectName).dll" "D:\Programs\IDA Pro 6.8 + Hex-Rays Decompiler (ARM, x64, x86)\plugins\CodeDevirtualizer.plw"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
